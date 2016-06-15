@@ -1,8 +1,20 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+    body {
+        padding: 50px;
+        font-family: 'Caveat Brush', cursive;
+        text-shadow: 4px 4px 4px #aaa;
+    }
+    a {
+        color: #00B7FF;
+    }
+    .button-xsmall {
+        font-size: 70%;
+    }
+    .button-small {
+        font-size: 85%;
+    }
+    .button-large {
+        font-size: 110%;
+    }
+    .button-xlarge {
+        font-size: 125%;
+    }
