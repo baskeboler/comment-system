@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  form(method='POST', action='/comments')
+    label author
+    input(type='text', name='author')
+    br
+    label title
+    input(type='text', name='title')
+    br
+    label comment
+    textarea(name='body')
+    br
+    input(type='hidden', name='page', value='testing-site/comments')
+    input(type='submit', value='send')
+    div(class='g-recaptcha', data-sitekey='6LfWoyITAAAAAMrEfkRJwOtjjuEkkjo6VMGfjXn8')
