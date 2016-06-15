@@ -4,16 +4,22 @@ var router = express.Router();
 var validateCaptcha = require('../middleware/captcha');
 var CommentCtrl = require('../controllers/comments');
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/form', function(req, res, next) {
     res.render('comments', {
         title: 'Comments'
     });
 });
 router.post('/', validateCaptcha, handlePost);
-router.get('/', getPostsForPage);
+router.get('/', all);
 
-function getPostsForPage(req, res) {
-
+function all(req, res) {
+  CommentCtrl.all()
+  .then(function(comments) {
+    res.send(comments);
+  })
+  .catch(function(err) {
+    res.status(500).send(err);
+  })
 }
 
 function handlePost(req, res) {

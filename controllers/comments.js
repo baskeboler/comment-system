@@ -34,6 +34,19 @@ function getCommentsForPage(page) {
   return deferred.promise;
 }
 
+function all() {
+  var deferred = Q.defer();
+  Comment.find({}, function(err, docs) {
+    if (err) {
+      deferred.reject(err);
+    } else {
+      deferred.resolve(docs);
+    }
+  });
+  return deferred.promise;
+}
+
 module.exports = {
-  save: createComment
+  save: createComment,
+  all: all
 };
