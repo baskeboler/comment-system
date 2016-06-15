@@ -20,25 +20,40 @@ var checkCaptchaData = function(req, res, next) {
         response: req.body['g-recaptcha-response'],
         remoteIp: req.ip
     });
-
     var verifyRequest = https.request(createHttpOptions(req, postData), (verifyResponse) => {
-
+        var responseData = '';
         if (verifyResponse.statusCode != 200) {
             res.status(403).send({
                 message: 'Captcha Failed'
             });
-        } else {
-            debug(`Captcha succeeded!`)
-            next();
         }
-    });
-    verifyRequest.on('error', (e) => {
-        debug('Error validating captcha');
-        debug(`${e}`);
-        res.status(500).send({
-            message: 'Error validating captcha'
+        debug(`status code: ${res.statusCode}`);
+        debug(`headers: ${JSON.stringify(res.headers)}`);
+        verifyResponse.on('error', (e) => {
+            debug('Error validating captcha');
+            debug(`${e}`);
+            res.status(500).send({
+                message: 'Error validating captcha'
+            });
+        });
+        verifyResponse.on('data', (chunk) => {
+            responseData += chunk;
+            debug(`chunk: ${chunk}`);
+        });
+        verifyResponse.on('end', () => {
+            debug(`response complete`);
+            var obj = JSON.parse(responseData);
+            if (obj.success)
+                next();
+            else {
+                res.status(500).send({
+                    message: 'Captcha failed',
+                    captchaObject: obj
+                });
+            }
         });
     });
+
     debug(`Sending post data ${postData}`);
     verifyRequest.write(postData);
     verifyRequest.end();

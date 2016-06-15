@@ -10,16 +10,23 @@ router.get('/', function(req, res, next) {
     });
 });
 router.post('/', validateCaptcha, handlePost);
+router.get('/', getPostsForPage);
 
-function handlePost(req, res) {
-    CommentCtrl.save(req, function(err, comment) {
-        if (err) {
-            return res.status(500).send({
-                message: 'Error creating comment'
-            });
-        }
-        return res.send(comment);
-    });
+function getPostsForPage(req, res) {
+
 }
 
+function handlePost(req, res) {
+    CommentCtrl.save(req)
+        .then(function(comment) {
+            res.send(comment);
+        })
+        .catch(function(err) {
+            res.status(500).send({
+                    message: 'Error creating comment'
+                }
+
+            );
+        });
+}
 module.exports = router;
