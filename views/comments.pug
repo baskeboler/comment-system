@@ -1,20 +1,17 @@
 extends layout
 
 block content
-  .pure-g
-    .pure-u-1-1
-      h1 Comment Form
-      form.pure-form.pure-form-stacked(method='POST', action='/comments')
-        fieldset
-          label author
-          input(type='text', name='author', required)
-          br
-          label title
-          input(type='text', name='title', required)
-          br
-          label comment
-          textarea(name='body')
-          br
-          input(type='hidden', name='page', value='testing-site/comments')
-          input.pure-button.pure-button-primary.button-xlarge(type='submit', value='send')
-          div(class='g-recaptcha', data-sitekey='6LfWoyITAAAAAMrEfkRJwOtjjuEkkjo6VMGfjXn8')
+    .pure-g
+        .pure-u-1-1
+            h1 Comment Form
+            form.pure-form.pure-form-stacked(method='POST', action='/comments')
+                fieldset
+                    label(for='author') author
+                    input(type='text', name='author', id='author', required)
+                    label(for='title') title
+                    input(type='text', name='title',id='title', required)
+                    label(for='body') comment
+                    textarea(name='body', id='body')
+                    input(type='hidden', name='page', value='testing-site/comments')
+                    input.pure-button.pure-button-primary.button-xlarge(type='submit', value='send')
+                    div(class='g-recaptcha', data-sitekey='6LfWoyITAAAAAMrEfkRJwOtjjuEkkjo6VMGfjXn8')
