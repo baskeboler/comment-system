@@ -1,17 +1,23 @@
-extends layout
+extends layout-ng
 
 block content
-    .pure-g
-        .pure-u-1-1
-            h1 Comment Form
-            form.pure-form.pure-form-stacked(method='POST', action='/comments')
+    .pure-g(ng-controller='CommentCtrl as vm')
+        .pure-u-1-2
+            button.pure-button.pure-button-default(type='button', ng-click='vm.comments=[];vm.loadAll();') Reload
+            .comments(ng-repeat='comment in vm.comments')
+              div.comment
+                h4 {{comment.title}}
+                h5 {{comment.author + ' -- '  + comment.date}}
+                p {{comment.body}}
+        .pure-u-1-2
+            h3 Comment Form
+            form.pure-form.pure-form-stacked(ng-submit='vm.save()')
                 fieldset
                     label(for='author') author
-                    input(type='text', name='author', id='author', required)
+                    input(type='text', ng-model='vm.comment.author', required)
                     label(for='title') title
-                    input(type='text', name='title',id='title', required)
+                    input(type='text', ng-model='vm.comment.title', required)
                     label(for='body') comment
-                    textarea(name='body', id='body')
-                    input(type='hidden', name='page', value='testing-site/comments')
+                    textarea(ng-model='vm.comment.body')
                     input.pure-button.pure-button-primary.button-xlarge(type='submit', value='send')
-                    div(class='g-recaptcha', data-sitekey='6LfWoyITAAAAAMrEfkRJwOtjjuEkkjo6VMGfjXn8')
+                    div(vc-recaptcha, ng-model='vm.comment.recaptchaResponse', key="'6LfWoyITAAAAAMrEfkRJwOtjjuEkkjo6VMGfjXn8'")
