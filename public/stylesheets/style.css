@@ -28,7 +28,7 @@
         -webkit-border-radius: 6px;
         border-radius: 6px;
         font: normal 16px/normal "Lucida Console", Monaco, monospace;
-        color: rgba(0, 0, 0, 0.9);
+        color: inherit;
         -o-text-overflow: clip;
         text-overflow: clip;
         background: -webkit-linear-gradient(0deg, rgba(208, 228, 247, 0.2) 0, rgba(115, 177, 231, 0.3) 24%, rgba(10, 119, 213, 0.5) 50%, rgba(83, 159, 225, 0.3) 79%, rgba(135, 188, 234, 0.2) 100%);

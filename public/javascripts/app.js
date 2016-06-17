@@ -1,5 +1,5 @@
 (function() {
-    angular.module('comments', ['ngResource', 'vcRecaptcha', 'ui.tinymce']);
+    angular.module('comments', ['ngResource', 'vcRecaptcha', 'ui.tinymce', 'ngSanitize']);
 
     angular.module('comments')
         .factory('Comment', Comment)
@@ -13,9 +13,27 @@
         $log.info('Inside CommentCtrl');
         var vm = this;
         vm.comment = {
+            body: 'Write something',
             page: 'testing-site/comments'
-        }
+        };
+        vm.tinymceOptions = {
+            // onChange: function(e) {
+            //     // put logic here for keypress and cut/paste changes
+            // },
+            inline: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools'
+            ],
+            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons',
+            skin: 'lightgray',
+            theme: 'modern'
+        };
         vm.save = save;
+        vm.remove = remove;
         // vm.comments = Comment.query({});
         vm.loadAll = loadAll;
         activate();
@@ -23,7 +41,9 @@
         function activate() {
             vm.loadAll();
         }
-
+        function remove(c) {
+          Comment.remove({id: c._id}).$promise.then(vm.loadAll);
+        }
         function save() {
             var obj = angular.copy(vm.comment);
             obj['g-recaptcha-response'] = obj.recaptchaResponse;

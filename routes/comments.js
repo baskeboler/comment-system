@@ -14,6 +14,11 @@ router.param('pageId', function(req, res, next, pageId) {
     req.pageId = pageId;
     next();
 });
+router.param('commentId', function(req, res, next, commentId) {
+  debug(`captured commentId=${commentId}`);
+  req.commentId = commentId;
+  next();
+})
 router.get('/form', function(req, res, next) {
     Q.when(CommentCtrl.pageComments('testing-site/comments'), function(comments) {
         debug('Promise fullfilled, mapping results');
@@ -46,9 +51,22 @@ router.get('/form', function(req, res, next) {
 });
 router.use(validateReferrer);
 router.post('/', validateCaptcha, handlePost);
+router.get('/:commentId', handleGetComment);
+router.delete('/:commentId', handleDeleteComment);
 router.get('/page/:pageId/comments', handleGetByPage);
 router.get('/', all);
 
+function handleDeleteComment(req, res) {
+  var id = req.commentId;
+  debug(`Deleting ${id}`);
+  CommentCtrl.delete(id).then(function() {
+    res.send({message: 'OK'});
+  })
+}
+
+function handleGetComment(req, res) {
+
+}
 function handleGetByPage(req, res) {
     CommentCtrl.pageComments(req.pageId)
         .then(function(comments) {
