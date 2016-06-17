@@ -1,5 +1,5 @@
 (function() {
-    angular.module('comments', ['ngResource', 'vcRecaptcha']);
+    angular.module('comments', ['ngResource', 'vcRecaptcha', 'ui.tinymce']);
 
     angular.module('comments')
         .factory('Comment', Comment)
