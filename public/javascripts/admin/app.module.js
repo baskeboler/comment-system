@@ -3,8 +3,8 @@
     angular.module('admin', [
             'ngResource',
             'ui.router',
-            'ui.bootstrap'
-            // 'ngAnimate',
+            'ui.bootstrap',
+            'ngAnimate'
             // 'foundation'
             // Foundation UI components
             // 'foundation'

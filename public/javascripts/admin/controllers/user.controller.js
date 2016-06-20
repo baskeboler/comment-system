@@ -1,9 +1,9 @@
 (function() {
     angular.module('admin').controller('UserController', UserController);
 
-    UserController.$inject = ['User'];
+    UserController.$inject = ['User', 'ConfirmationModal'];
 
-    function UserController(User) {
+    function UserController(User,ConfirmationModal) {
         var vm = this;
         vm.users = [];
         vm.loadAll = loadAll;
@@ -19,8 +19,14 @@
         }
 
         function remove(user) {
-          User.remove({id: user.username}, vm.loadAll);
+          ConfirmationModal.confirm({message: 'Remove user?'})
+            .then(function(confirmation) {
+              if (confirmation) {
+                User.remove({id: user.username}, vm.loadAll);
+              }
+            });
         }
+        
         function loadAll() {
           User.query({}, function(users) {
             vm.users = users;
