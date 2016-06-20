@@ -1,16 +1,19 @@
+var passport = require('./conf/admin-passport-config');
 var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
+var app = express();
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var captcha = require('./middleware/captcha');
 var comments = require('./routes/comments');
-
-var app = express();
+var admin = require('./routes/admin');
+var userAdmin = require('./routes/api/user');
+var referrerAdmin = require('./routes/api/referrer');
+var path = require('path');
+var favicon = require('serve-favicon');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,10 +27,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/libs', express.static(path.join(__dirname, 'bower_components')));
-
+// app.use(passport.initialize());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/comments', comments);
+app.use('/admin', admin);
+app.use('/api/admin/user', userAdmin);
+app.use('/api/admin/referrer', referrerAdmin);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

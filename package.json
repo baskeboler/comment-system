@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "npm run bowerInstall; npm run buildPureCss",
+    "buildPureCss": "cd bower_components/pure; npm install; grunt",
+    "bowerInstall": "./node_modules/bower/bin/bower install"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "~1.13.2",
     "bower": "^1.7.9",
     "cookie-parser": "~1.3.5",
@@ -14,11 +17,16 @@
     "debug": "~2.2.0",
     "ejs": "^2.4.2",
     "express": "~4.13.1",
+    "express-session": "^1.13.0",
     "http": "0.0.0",
     "jade": "^1.11.0",
+    "jsonwebtoken": "^7.0.1",
     "lodash": "^4.13.1",
     "mongoose": "^4.5.0",
     "morgan": "~1.6.1",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.0.0",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta3",
     "q": "^1.4.1",
     "serve-favicon": "~2.3.0",

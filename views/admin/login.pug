@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .container
+    h2 Please sign in
+    form.form(action='/admin/login', method='POST')
+      .form-group
+        label User
+        input.form-control#username(type='text', name='username')
+      .form-group
+        label Password
+        input.form-control#password(type='password', name='password')
+      button.btn.btn-primary.btn-block(type='submit') Login

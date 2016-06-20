@@ -39,11 +39,13 @@ router.get('/form', function(req, res, next) {
         });
         debug('Results mapped');
         res.render('comments', {
+          appname: 'comments',
             title: 'Comments',
             comments: commentCollection
         });
     }, function() {
         res.render('comments', {
+          appname: 'comments',
             title: 'Comments',
             comments: []
         });

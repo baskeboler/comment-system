@@ -1,0 +1,23 @@
+doctype html
+html(ng-app= appname)
+    head
+      title= title
+      link(rel='stylesheet', href='/libs/bootstrap/dist/css/bootstrap.css')
+      link(rel='stylesheet', href='/stylesheets/admin/style.css')
+      meta(name="viewport" content="width=device-width, initial-scale=1")
+      script(src='/libs/angular/angular.js')
+      script(src='/libs/angular-resource/angular-resource.js')
+      script(src='/libs/angular-ui-router/release/angular-ui-router.js')
+      script(src='/libs/angular-bootstrap/ui-bootstrap.js')
+      script(src='/javascripts/admin/app.module.js')
+      script(src='/javascripts/admin/controllers/menu.controller.js')
+      script(src='/javascripts/admin/controllers/dashboard.controller.js')
+      script(src='/javascripts/admin/controllers/user.controller.js')
+      script(src='/javascripts/admin/controllers/referrer.controller.js')
+      script(src='/javascripts/admin/controllers/login.controller.js')
+      script(src='/javascripts/admin/services/referrer.service.js')
+      script(src='/javascripts/admin/services/auth.service.js')
+      script(src='/javascripts/admin/services/user.service.js')
+      script(src='/javascripts/admin/services/authInterceptor.service.js')
+    body
+        block content

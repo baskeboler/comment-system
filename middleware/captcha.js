@@ -1,13 +1,13 @@
-const http = require('http');
-const https = require('https');
-const url = require('url');
-const debug = require('debug')('comment-system:captcha');
-const querystring = require('querystring');
+var http = require('http');
+var https = require('https');
+var url = require('url');
+var debug = require('debug')('comment-system:captcha');
+var querystring = require('querystring');
 
-const appConfig = require('../conf/config');
+var appConfig = require('../conf/config');
 
 
-const verifyUrl = url.parse(appConfig.captcha_verify_url);
+var verifyUrl = url.parse(appConfig.captcha_verify_url);
 debug(`loading captcha verify url`);
 debug(`protocol: ${verifyUrl.protocol}`);
 debug(`hostname: ${verifyUrl.hostname}`);

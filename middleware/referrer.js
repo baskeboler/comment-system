@@ -1,6 +1,7 @@
 const debug = require('debug')('comment-system:referrer');
 const url = require('url');
 var Referrer = require('../models/referrer');
+
 debug('Initializing referrer middleware');
 Referrer.count({}, function(err, count) {
   if (!err) {
